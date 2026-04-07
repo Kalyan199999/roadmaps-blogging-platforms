@@ -58,7 +58,7 @@ const getBlogs = async (req,res)=>
 
         const skip = (page-1)*limit;
 
-        const query = `select id,title,catogory,tags,updatedAt from personalblog limit ${limit} offset ${skip}`;
+        const query = `select id,title,content,catogory,tags,updatedAt from personalblog limit ${limit} offset ${skip}`;
 
         // query to fetch all the records
         const [ data  ] = await pool.execute(query );
