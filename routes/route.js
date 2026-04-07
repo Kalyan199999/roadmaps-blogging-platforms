@@ -4,7 +4,8 @@ const {
     createPost,
     getBlogs,
     getBlogById,
-    deleteBlog
+    deleteBlog,
+    updateBlog
 } = require('../controllers/controller')
 
 const route = expres.Router();
@@ -16,5 +17,7 @@ route.get( '/' ,  getBlogs)
 route.get('/:id',getBlogById)
 
 route.delete('/:id' , deleteBlog)
+
+route.patch( '/:id' , updateBlog )
 
 module.exports = route
