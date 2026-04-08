@@ -230,10 +230,48 @@ const updateBlog = async (req, res) => {
     }
 };
 
+
+const searchByCategory = async (req,res)=>
+{
+    try
+    {
+        const { item } = req.params;
+
+        if( !item.trim() )
+        {
+            return res.status(404).json({
+                ok:false,
+                message:"Search item is Empty!",
+                data:[]
+            })
+        }
+
+        const query = `select id,title,content,catogory,tags from personalblog where catogory like ? `;
+
+        const searchTerm = `%${item.trim().toLowerCase()}%`;
+
+        const [ data  ] = await pool.execute(query,[searchTerm] );
+
+        return res.status(200).json({
+            ok:true,
+            message:'Fetched successfully!',
+            data:data
+        })
+    }
+    catch(error)
+    {
+        return res.status(500).json({
+            ok:false,
+            message:error.message
+        })
+    }
+}
+
 module.exports = {
     createPost,
     getBlogs,
     getBlogById,
     deleteBlog,
-    updateBlog
+    updateBlog,
+    searchByCategory
 }

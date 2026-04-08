@@ -5,7 +5,8 @@ const {
     getBlogs,
     getBlogById,
     deleteBlog,
-    updateBlog
+    updateBlog,
+    searchByCategory
 } = require('../controllers/controller')
 
 const route = expres.Router();
@@ -19,5 +20,7 @@ route.get('/:id',getBlogById)
 route.delete('/:id' , deleteBlog)
 
 route.patch( '/:id' , updateBlog )
+
+route.get( '/search-category/:item' , searchByCategory )
 
 module.exports = route
